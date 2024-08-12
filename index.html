@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>賭場</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./css.css" />
+    <link id="桌css" rel="stylesheet" />
+    <script src="./universal.js"></script>
+    <script src="./api.js"></script>
+    <script src="./選擇玩家.js"></script>
+    <script src="./進度控制.js"></script>
+    <script src="./下注歷程管理.js"></script>
+    <script src="./籌碼歷程管理.js"></script>
+    <script src="./通用玩家動作.js"></script>
+    <script src="./俄羅斯輪盤桌/顯示控制.js"></script>
+  </head>
+  <body>
+    <header>
+      <div id="頁首顯示區"></div>
+      <div id="頁首玩家資料區">
+        <span>你是：</span><output id="自己名字">未選擇</output>
+        <button onclick="重新選擇玩家()">重新選擇</button>
+      </div>
+    </header>
+    <main id="主畫面"></main>
+    <div id="提示訊息" class="黑底" style="display: none;">
+      <div class="白底"></div>
+    </div>
+    <div id="可關閉提示訊息" class="黑底" style="display: none;">
+      <div class="白底">
+        <div class="內文"></div>
+        <button onclick="關閉提示()">X</button>
+      </div>
+    </div>
+    <div id="選擇玩家視窗" class="黑底" style="display: none;">
+      <div class="白底"></div>
+    </div>
+    <div id="選擇桌視窗" class="黑底" style="display: none;">
+      <div class="白底"></div>
+    </div>
+    <script>
+      window.addEventListener('load', async () => {
+        <!-- 停止每刻(); -->
+        <!-- 下注管理.重新讀取目前資料(); -->
+        <!-- 控制_俄羅斯輪盤桌.完整資料顯示(); -->
+        讀取使用者是誰();
+      });
+      function 提示(內容) {
+        if(!內容) {
+          find('#提示訊息 .白底').innerHTML = "";
+          find('#提示訊息').style.display = "none";
+          return;
+        }
+        find('#提示訊息 .白底').innerHTML = 內容;
+        find('#提示訊息').style.display = "";
+      }
+      function 可關閉提示(內容) {
+        if(!內容) return 關閉提示();
+        find('#可關閉提示訊息 .白底 .內文').innerHTML = 內容;
+        find('#可關閉提示訊息').style.display = "";
+      }
+      function 關閉提示() {
+        find('#可關閉提示訊息 .白底 .內文').innerHTML = "";
+        find('#可關閉提示訊息').style.display = "none";
+      }
+      function 等(time) {
+        return new Promise( (resolve, reject) => setTimeout(resolve, time) );
+      }
+    </script>
+  </body>
+</html>

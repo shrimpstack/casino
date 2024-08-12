@@ -1,0 +1,341 @@
+.顯示區 {
+  position: relative;
+  width: 1300px;
+  height: 860px;
+  background: #eee;
+}
+
+/* ================================ */
+/*  座位                            */
+/* ================================ */
+.座位區 {
+  position: absolute;
+  left: 650px;
+  top: 430px;
+}
+#主畫面.入座中 .座位區 {
+  pointer-events: none;
+}
+
+.座位 {
+  position: absolute;
+  width: 280px;
+  height: 360px;
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  background-position: left 0px top 0px;
+  display: flex;
+  justify-content: center;
+}
+.座位 button {
+  all: unset;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  z-index: 1;
+  top: 140px;
+  background: linear-gradient(#747474, #414141);
+  border-radius: 8px;
+  text-align: center;
+  color: #f3b657;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity .4s;
+}
+.座位區.不可入座 button, .座位.有人 button {
+  display: none;
+}
+.座位 button:hover {
+  opacity: 1;
+}
+.座位[number="R1"], .座位[number="R2"] {
+  background-position: left 100% top 0px;
+}
+.座位[number="L1"] { left: -540px; top: -260px; }
+.座位[number="L2"] { left: -402px; top: -318px; }
+.座位[number="L3"] { left: -264px; top: -376px; }
+.座位[number="L4"] { left: -126px; top: -434px; }
+.座位[number="L5"] { left:   12px; top: -492px; }
+.座位[number="R1"] { left:  204px; top: -468px; }
+.座位[number="R2"] { left:  328px; top: -366px; }
+
+/* ================================ */
+/*  持有籌碼的顯示                  */
+/* ================================ */
+.持有區 {
+  position: absolute;
+  left: 880px;
+  top: 50px;
+  pointer-events: none;
+}
+.持有 {
+  position: absolute;
+}
+.持有 .堆 {
+  position: absolute;
+  display: flex;
+  width: 0;
+  align-items: center;
+  flex-direction: column-reverse;
+  margin-bottom: 5px;
+}
+.持有 img {
+  width: max-content;
+  margin-bottom: -12px;
+  z-index: 1;
+}
+.持有[number="L1"] { left: -629px; bottom: -268px; }
+.持有[number="L2"] { left: -491px; bottom: -210px; }
+.持有[number="L3"] { left: -353px; bottom: -152px; }
+.持有[number="L4"] { left: -215px; bottom:  -94px; }
+.持有[number="L5"] { left:  -77px; bottom:  -36px; }
+.持有[number="R1"] { left:  37px; bottom:  -36px; }
+.持有[number="R2"] { left: 161px; bottom: -138px; }
+.持有 .堆:nth-child(1) { left:  10px; bottom:  3px; }
+.持有 .堆:nth-child(2) { left: -18px; bottom: -7px; }
+.持有 .堆:nth-child(3) { left:   0px; bottom: -5px; }
+.持有[number^="R"] .堆:nth-child(1) { left: 13px; bottom:  -7px; }
+.持有[number^="R"] .堆:nth-child(2) { left: -12px; bottom:  6px; }
+.持有[number^="R"] .堆:nth-child(3) { left:  -3px; bottom: -4px; }
+
+/* ================================ */
+/*  桌子                            */
+/* ================================ */
+.桌子 {
+  position: absolute;
+  left: 31px;
+  top: 174px;
+  width: 1139px;
+  height: 649px;
+  background: url(./桌.png);
+}
+
+/* ================================ */
+/*  下注區                          */
+/* ================================ */
+.下注區 {
+  position: absolute;
+  top: 334px;
+  left: 278px;
+}
+
+.下注顯示 {
+  pointer-events: none;
+}
+
+.下注顯示 [bid] {
+  position: absolute;
+  display: flex;
+  width: 0;
+  align-items: center;
+  flex-direction: column-reverse;
+  margin-bottom: 5px;
+  transition: left .4s, bottom .4s;
+}
+.下注顯示 img {
+  width: max-content;
+  margin-bottom: -12px;
+  z-index: 1;
+}
+
+.下注觸控 {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  box-sizing: border-box;
+  padding-top: 11px;
+  width: 646px;
+  height: 191px;
+  transform: rotate(-22.85deg) skewX(28.3deg);
+  transform-origin: left top;
+
+  display: grid;
+  grid-template-columns: 14px repeat(24, 25.1px) 1fr;
+  grid-template-rows: repeat(5, 21.3px) 18px repeat(2, 1fr);
+  grid-template-areas:
+    "分01 直1 分H1 直4 分H4 直7 分H7 直10 分H10 直13 分H13 直16 分H16 直19 分H19 直22 分H22 直25 分H25 直28 分H28 直31 分H31 直34 . 列1"
+    "路2 分V1 角1 分V4 角4 分V7 角7 分V10 角10 分V13 角13 分V16 角16 分V19 角19 分V22 角22 分V25 角25 分V28 角28 分V31 角31 分V34 . ."
+    "分02 直2 分H2 直5 分H5 直8 分H8 直11 分H11 直14 分H14 直17 分H17 直20 分H20 直23 分H23 直26 分H26 直29 分H29 直32 分H32 直35 . 列2"
+    "路3 分V2 角2 分V5 角5 分V8 角8 分V11 角11 分V14 角14 分V17 角17 分V20 角20 分V23 角23 分V26 角26 分V29 角29 分V32 角32 分V35 . ."
+    "分03 直3 分H3 直6 分H6 直9 分H9 直12 分H12 直15 分H15 直18 分H18 直21 分H21 直24 分H24 直27 分H27 直30 分H30 直33 分H33 直36 . 列3"
+    "角0 路1 線1 路4 線4 路7 線7 路10 線10 路13 線13 路16 線16 路19 線19 路22 線22 路25 線25 路28 線28 路31 線31 路34 . ."
+    ". 區1 區1 區1 區1 區1 區1 區1 . 區2 區2 區2 區2 區2 區2 區2 . 區3 區3 區3 區3 區3 區3 區3 . ."
+    ". 小 小 小 . 奇 奇 奇 . 紅 紅 紅 . 黑 黑 黑 . 偶 偶 偶 . 大 大 大 . .";
+}
+.下注觸控 :is([bid="分01"], [bid="路2"], [bid="分02"], [bid="路3"], [bid="分03"], [bid="角0"]) {
+  position: relative;
+  left: -11px;
+  width: 25px;
+}
+.下注觸控 :is([bid="列1"], [bid="列2"], [bid="列3"]) {
+  position: relative;
+  top: -6px;
+  height: 33px;
+  left: -8px;
+  width: 33px;
+}
+.下注觸控 [bid="直0"] {
+  position: absolute;
+  right: calc(100% + 6px);
+  top: 12px;
+  width: 28px;
+  height: 104px;
+  clip-path: polygon(1.5px 21px, 100% 0, 100% 100%, 0 calc(100% - 18px));
+}
+.下注觸控 [bid]:hover {
+  background: linear-gradient(#e9bd7833, #0000, #e9bd7833);
+  cursor: pointer;
+  filter: drop-shadow(0 0 1px #ffec95) drop-shadow(0 0 2px #ffec95);
+  backdrop-filter: sepia(.8) brightness(1.1);
+}
+
+/* ================================ */
+/*  玻璃標記                        */
+/* ================================ */
+.玻璃標記 {
+  position: absolute;
+  pointer-events: none;
+  left: 460px;
+  bottom: -40px;
+  margin: -9px -7px;
+  transition: left .4s, bottom .4s;
+  z-index: 10;
+}
+
+/* ================================ */
+/*  荷官                            */
+/* ================================ */
+.荷官 {
+  position: absolute;
+  left: 560px;
+  top: 460px;
+  width: 280px;
+  height: 360px;
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  background-position: left 0px top 0px;
+  pointer-events: none;
+}
+
+/* ================================ */
+/*  輪盤                            */
+/* ================================ */
+.輪盤 .數字 {
+  position: absolute;
+  bottom: 57px;
+  margin: 0 -23px;
+  width: 42px;
+  height: 30px;
+  border-radius: 4px;
+  line-height: 30px;
+  text-align: center;
+  font-family: monospace;
+  font-size: 20px;
+  border: 2px solid #fcca7d;
+  filter: drop-shadow(0 0 1px #502a13) drop-shadow(0 0 #502a13) drop-shadow(0 0 #502a13) drop-shadow(0 0 #502a13) drop-shadow(0 0 #502a13) drop-shadow(0 0 #502a13);
+  background: #eee;
+  color: #fff;
+}
+.輪盤:not([數字]) .數字 { display: none; }
+.輪盤[顏色="紅"] .數字 { background: #bd5457; }
+.輪盤[顏色="黑"] .數字 { background: #444748; }
+.輪盤[顏色="綠"] .數字 { background: #469858; }
+.輪盤 .數字:before {
+  content: "";
+  clip-path: polygon(0 0, 0 100%, 100% 100%);
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border: inherit;
+  background: inherit;
+  border-radius: 0 0 0 4px;
+  transform: rotate(-45deg);
+  bottom: -7px;
+  left: 14px;
+}
+.輪盤:not(.停止) .數字:after {
+  content: "?";
+}
+
+/* ================================ */
+/*  輪盤                            */
+/* ================================ */
+.輪盤 {
+  position: absolute;
+  top: 392px;
+  left: 126px;
+}
+.輪盤 .鐵珠 {
+  --橢圓程度: 0.6;
+  --距離: 40px;
+  transform: scaleY(var(--橢圓程度));
+}
+.輪盤:not(.停止) .鐵珠 {
+  --橢圓程度: 0.7;
+  --距離: 60px;
+}
+.輪盤 .鐵珠:before {
+  content: "";
+  position: absolute;
+  left: 0; /* 40 */
+  top: 0; /* 24 */
+  width: 8px;
+  height: calc(8px / var(--橢圓程度));
+  margin: -4px;
+  border-radius: 50%;
+  border: 1px solid #555;
+  background: radial-gradient(circle at 36% 36%, #fffd 10%, #0000 32%), radial-gradient(circle at 70% 70%, #aaa 5%, #555 50%, #eee 80%, #fff 100%);
+  transform: rotate(var(--角度)) translateY(var(--距離)) rotate(calc(var(--角度) * -1));
+}
+
+.輪盤:not(.停止) .鐵珠:before {
+  animation-name: move;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+.輪盤:not([數字]) { --角度:  59.5deg; }
+.輪盤[數字= "0"] { --角度:  59.5deg; }
+.輪盤[數字="26"] { --角度:    47deg; }
+.輪盤[數字= "3"] { --角度:    37deg; }
+.輪盤[數字="35"] { --角度:    27deg; }
+.輪盤[數字="12"] { --角度:    17deg; }
+.輪盤[數字= "7"] { --角度:     0deg; }
+.輪盤[數字="29"] { --角度:   351deg; }
+.輪盤[數字="18"] { --角度:   343deg; }
+.輪盤[數字="22"] { --角度: 334.5deg; }
+.輪盤[數字= "9"] { --角度:   326deg; }
+.輪盤[數字="31"] { --角度:   317deg; }
+.輪盤[數字="14"] { --角度:   307deg; }
+.輪盤[數字="20"] { --角度:   299deg; }
+.輪盤[數字= "1"] { --角度:   288deg; }
+.輪盤[數字="33"] { --角度:   278deg; }
+.輪盤[數字="16"] { --角度:   267deg; }
+.輪盤[數字="24"] { --角度:   254deg; }
+.輪盤[數字= "5"] { --角度:   243deg; }
+.輪盤[數字="10"] { --角度:   235deg; }
+.輪盤[數字="23"] { --角度:   224deg; }
+.輪盤[數字= "8"] { --角度:   217deg; }
+.輪盤[數字="30"] { --角度:   207deg; }
+.輪盤[數字="11"] { --角度:   198deg; }
+.輪盤[數字="36"] { --角度:   189deg; }
+.輪盤[數字="13"] { --角度:   182deg; }
+.輪盤[數字="27"] { --角度:   174deg; }
+.輪盤[數字= "6"] { --角度:   166deg; }
+.輪盤[數字="34"] { --角度:   158deg; }
+.輪盤[數字="17"] { --角度:   150deg; }
+.輪盤[數字="25"] { --角度:   143deg; }
+.輪盤[數字= "2"] { --角度:   133deg; }
+.輪盤[數字="21"] { --角度:   123deg; }
+.輪盤[數字= "4"] { --角度:   112deg; }
+.輪盤[數字="19"] { --角度:   100deg; }
+.輪盤[數字="15"] { --角度:    86deg; }
+.輪盤[數字="32"] { --角度:    71deg; }
+
+@keyframes move {
+  0%   { transform: rotate(  0deg) translateY(var(--距離)) rotate(  -0deg); }
+  50%  { transform: rotate(180deg) translateY(var(--距離)) rotate(-180deg); }
+  100% { transform: rotate(360deg) translateY(var(--距離)) rotate(-360deg); }
+}
