@@ -111,8 +111,12 @@ function 選擇桌() {
   get("取得所有桌").then(res => {
     if(!res.成功) return;
     列表el.innerHTML = "";
-    res.data.forEach(({桌編號, 桌名, 預覽圖網址}) => {
-      let btn = new_el_to_el(列表el, 'button', 桌名);
+    new_el_to_el(列表el, 'h3', '選擇桌');
+    res.data.forEach(({桌編號, 桌名, 預覽圖網址, 類型}) => {
+      let btn = new_el_to_el(列表el, 'button', [
+        new_el('span', 桌名),
+        new_el('img', {src: `./${類型}/預覽.png`}),
+      ]);
       btn.addEventListener('click', () => {
         選擇桌視窗.style.display = "none";
         列表el.innerHTML = "";

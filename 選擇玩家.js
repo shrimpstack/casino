@@ -61,8 +61,12 @@ function 選擇玩家() {
   get("取得可選玩家").then(res => {
     if(!res.成功) return;
     列表el.innerHTML = "";
+    new_el_to_el(列表el, 'h3', '選擇角色');
     res.data.forEach(({名字}) => {
-      let btn = new_el_to_el(列表el, 'button', 名字);
+      let btn = new_el_to_el(列表el, 'button', [
+        new_el('span', 名字),
+        new_el('img', {src: `./玩家預覽/${名字}.png`}),
+      ]);
       btn.addEventListener('click', () => {
         自己.名字 = 名字;
         選擇玩家視窗.style.display = "none";
