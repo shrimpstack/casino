@@ -216,6 +216,12 @@
   background-position: left 0px top 0px;
   pointer-events: none;
 }
+.荷官[action="可以下注"] {
+  background-position: left -280px top 0px;
+}
+.荷官[action="停止下注"] {
+  background-position: left -560px top 0px;
+}
 
 /* ================================ */
 /*  輪盤                            */
