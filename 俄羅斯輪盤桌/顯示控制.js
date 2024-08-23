@@ -269,7 +269,9 @@ const 控制_俄羅斯輪盤桌 = (() => {
       else {
         座位.classList.add('有人');
         let 名字 = 查看中的桌資料.座位狀態[座位編號];
-        座位.style.backgroundImage = `url(./玩家/${名字}.png)`;
+        let 狀態 = 查看中的桌資料.玩家狀態.find(玩家資料 => 玩家資料.名字 == 名字).狀態;
+        狀態 = 狀態 ? "_" + 狀態 : "";
+        座位.style.backgroundImage = `url(./玩家/${名字 + 狀態}.png)`;
       }
     });
     重新顯示籌碼狀態();
